@@ -36,7 +36,8 @@ function OrbitingModules() {
   }, []);
 
   useFrame((state) => {
-    if (!mesh.current) return;
+    const m = mesh.current;
+    if (!m) return;
     const t = state.clock.getElapsedTime();
     nodes.forEach((node, idx) => {
       const angle = t * node.speed + node.phase;
@@ -48,9 +49,9 @@ function OrbitingModules() {
       const scale = node.size + Math.sin(t * 1.4 + idx) * 0.03;
       dummy.scale.setScalar(scale * 1.5);
       dummy.updateMatrix();
-      mesh.current.setMatrixAt(idx, dummy.matrix);
+      m.setMatrixAt(idx, dummy.matrix);
     });
-    mesh.current.instanceMatrix.needsUpdate = true;
+    m.instanceMatrix.needsUpdate = true;
   });
 
   return (
