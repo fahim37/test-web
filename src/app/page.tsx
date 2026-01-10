@@ -5,6 +5,7 @@ import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useRef } from "react";
 import HeroCanvas from "@/components/HeroCanvas";
 import ThemeToggle from "@/components/ThemeToggle";
+import StackedProjects from "@/components/StackedProjects";
 
 const navLinks = [
   { href: "#services", label: "Services" },
@@ -33,72 +34,6 @@ const services = [
     title: "Growth & Optimization",
     description: "Experiments, performance tuning, and analytics to keep the product fast and the story resonant.",
     tags: ["A/B + telemetry", "Web Vitals", "Lifecycle"],
-  },
-];
-
-const projects = [
-  {
-    title: "Helix Cloud OS",
-    summary: "Realtime ops dashboard for a global logistics network with adaptive alerts and AI copilots.",
-    impact: "Release cadence improved by 72% with zero regression launches.",
-    tags: ["Edge streaming", "Design system", "AIOps"],
-    gradient: "from-cyan-400/25 via-sky-400/10 to-amber-300/10",
-  },
-  {
-    title: "Pulse Health Suite",
-    summary: "Patient-first care platform with biometric monitoring and collaborative care plans across devices.",
-    impact: "NPS +24 and triage time reduced from 14 mins to 4 mins.",
-    tags: ["HIPAA ready", "Native + web", "Data viz"],
-    gradient: "from-emerald-400/25 via-teal-400/10 to-sky-300/10",
-  },
-  {
-    title: "Arclight Finance",
-    summary: "Quant research workspace with interactive 3D trade flows, scenario tools, and live compliance guardrails.",
-    impact: "Cut analyst onboarding time by 40% with guided automation.",
-    tags: ["3D analytics", "Realtime collab", "Secure by default"],
-    gradient: "from-indigo-400/25 via-sky-400/10 to-orange-300/10",
-  },
-  {
-    title: "Photon Dev Portal",
-    summary: "Developer hub with interactive API sandboxes, live docs, and guided onboarding flows.",
-    impact: "Time-to-first-call down from 40 mins to 6 mins.",
-    tags: ["API DX", "Docs", "SDKs"],
-    gradient: "from-cyan-300/25 via-blue-400/10 to-fuchsia-300/10",
-  },
-  {
-    title: "Nova Commerce",
-    summary: "Headless commerce experience with adaptive pricing, 3D product viewers, and blazing-fast search.",
-    impact: "Conversion rate +18% and cart speed -45%.",
-    tags: ["Headless", "Search", "3D viewers"],
-    gradient: "from-amber-300/25 via-rose-300/10 to-cyan-300/10",
-  },
-  {
-    title: "Circuit AI Studio",
-    summary: "Canvas for orchestrating AI workflows, live metrics, and safety rails across deployments.",
-    impact: "Experiment velocity +3.2x with guardrails baked in.",
-    tags: ["AI tooling", "Observability", "Safety"],
-    gradient: "from-emerald-300/25 via-teal-400/10 to-blue-300/10",
-  },
-  {
-    title: "Lumen Support Desk",
-    summary: "Agent assist console with real-time suggestions, keyboard-first UX, and searchable transcripts.",
-    impact: "Handle time -27% and CSAT +19 points.",
-    tags: ["AI assist", "Keyboard UX", "Analytics"],
-    gradient: "from-violet-300/25 via-blue-300/10 to-lime-300/10",
-  },
-  {
-    title: "Atlas IoT Grid",
-    summary: "Command center for millions of IoT nodes with geo heatmaps, alerting, and offline-first sync.",
-    impact: "Reduced false positives by 34% with smarter alerting.",
-    tags: ["IoT", "Maps", "Offline-first"],
-    gradient: "from-sky-300/25 via-emerald-300/10 to-amber-200/10",
-  },
-  {
-    title: "Vertex Learning Lab",
-    summary: "Edtech platform with adaptive paths, 3D labs, and gamified progress for distributed teams.",
-    impact: "Course completion up 22% with personalized pacing.",
-    tags: ["Edtech", "3D labs", "Personalization"],
-    gradient: "from-indigo-300/25 via-cyan-300/10 to-emerald-300/10",
   },
 ];
 
@@ -145,7 +80,7 @@ export default function Home() {
         <Hero />
         <Logos />
         <Services sectionRef={servicesRef} />
-        <Projects sectionRef={projectsRef} />
+        <StackedProjects sectionRef={projectsRef} />
         <Process sectionRef={approachRef} />
         <Contact />
       </div>
@@ -297,29 +232,6 @@ function Hero() {
       >
         <div className="absolute -left-10 -top-8 h-28 w-28 rounded-full bg-[var(--accent)]/10 blur-2xl" />
         <HeroCanvas />
-        <div className="pointer-events-none absolute inset-0">
-          <motion.div
-            animate={{ y: [-6, 6, -6] }}
-            transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-            className="absolute left-6 top-6 rounded-xl border border-[var(--stroke)] bg-[var(--card-bg)] px-3 py-2 text-xs text-[var(--text-secondary)] shadow-sm backdrop-blur"
-          >
-            Live deploys & storybook links
-          </motion.div>
-          <motion.div
-            animate={{ y: [10, -4, 10] }}
-            transition={{ repeat: Infinity, duration: 7, ease: "easeInOut", delay: 0.6 }}
-            className="absolute bottom-6 right-6 rounded-xl border border-[var(--stroke)] bg-[var(--card-bg)] px-3 py-2 text-xs text-[var(--text-secondary)] shadow-sm backdrop-blur"
-          >
-            CI ready · Preview in minutes
-          </motion.div>
-          <motion.div
-            animate={{ y: [-8, 4, -8], x: [0, 4, 0] }}
-            transition={{ repeat: Infinity, duration: 7.5, ease: "easeInOut", delay: 1.2 }}
-            className="absolute right-[32%] top-10 rounded-xl border border-[var(--stroke)] bg-[var(--card-bg)] px-3 py-2 text-xs text-[var(--text-secondary)] shadow-sm backdrop-blur"
-          >
-            Hover / drag to orbit the modules
-          </motion.div>
-        </div>
       </motion.div>
     </section>
   );
@@ -395,83 +307,6 @@ function Services({ sectionRef }: { sectionRef?: React.RefObject<HTMLElement | n
         ))}
       </div>
     </ParallaxSection>
-  );
-}
-
-function Projects({ sectionRef }: { sectionRef?: React.RefObject<HTMLElement | null> }) {
-  return (
-    <ParallaxSection id="work" sectionRef={sectionRef} intensity={60} className="mt-16 space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <p className="text-sm font-semibold text-[var(--accent-strong)]">Selected work</p>
-          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">Experiences that move</h2>
-          <p className="max-w-2xl text-[var(--text-secondary)]">
-            Interactive 3D, realtime systems, and design systems that keep teams confident after launch.
-          </p>
-        </div>
-        <Link
-          href="/projects"
-          className="hidden rounded-full bg-[var(--text-primary)] px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90 md:inline-flex"
-        >
-          See details
-        </Link>
-      </div>
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {projects.map((project, idx) => (
-          <ProjectCard key={project.title} project={project} delay={idx * 0.1} direction={idx % 2 === 0 ? -1 : 1} />
-        ))}
-      </div>
-    </ParallaxSection>
-  );
-}
-
-function ProjectCard({
-  project,
-  delay,
-  direction,
-}: {
-  project: (typeof projects)[number];
-  delay: number;
-  direction: number;
-}) {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const xRaw = useTransform(scrollYProgress, [0, 1], [direction * 40, direction * -40]);
-  const x = useSpring(xRaw, { stiffness: 120, damping: 20, mass: 0.35 });
-
-  return (
-    <motion.div
-      ref={ref}
-      style={{ x }}
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.4 }}
-      transition={{ duration: 0.45, delay }}
-      className="relative overflow-hidden rounded-3xl border border-[var(--stroke)] bg-[var(--card-bg)] p-6"
-    >
-      <div
-        className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-80 transition duration-500`}
-      />
-      <motion.div whileHover={{ y: -4 }} className="relative flex h-full flex-col justify-between gap-4">
-        <div className="space-y-3">
-          <div className="inline-flex rounded-full bg-[var(--text-primary)]/10 px-3 py-1 text-xs font-semibold text-[var(--text-primary)]">
-            {project.title}
-          </div>
-          <p className="text-lg font-semibold text-[var(--text-primary)]">{project.summary}</p>
-          <p className="text-[var(--text-secondary)]">{project.impact}</p>
-        </div>
-        <div className="flex flex-wrap gap-2 text-xs font-semibold text-[var(--text-secondary)]">
-          {project.tags.map((tag) => (
-            <span key={tag} className="rounded-full bg-[var(--card-bg)]/70 px-3 py-1 backdrop-blur">
-              {tag}
-            </span>
-          ))}
-        </div>
-      </motion.div>
-    </motion.div>
   );
 }
 
@@ -596,3 +431,4 @@ function Footer() {
     </footer>
   );
 }
+
