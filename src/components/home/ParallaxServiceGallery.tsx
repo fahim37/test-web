@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion, useInView, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { AnimatePresence, motion, useInView, useScroll, useTransform } from "framer-motion";
 
 type Service = {
   title: string;
@@ -20,7 +20,7 @@ const services: Service[] = [
       "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?auto=format&fit=crop&w=1200&q=80",
     ],
-    color: "rgba(59, 130, 246, 0.4)", // Blue
+    color: "rgba(59, 130, 246, 0.3)", // Blue
   },
   {
     title: "UI/UX Development",
@@ -30,7 +30,7 @@ const services: Service[] = [
       "https://images.unsplash.com/photo-1581291518062-c9a79415c6b9?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1618761767630-0114b392cf98?auto=format&fit=crop&w=1200&q=80",
     ],
-    color: "rgba(168, 85, 247, 0.4)", // Purple
+    color: "rgba(168, 85, 247, 0.3)", // Purple
   },
   {
     title: "Backend Development",
@@ -40,7 +40,7 @@ const services: Service[] = [
       "https://images.unsplash.com/photo-1558494949-ef010cbdcc51?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
     ],
-    color: "rgba(239, 68, 68, 0.4)", // Red
+    color: "rgba(239, 68, 68, 0.3)", // Red
   },
   {
     title: "Frontend Development",
@@ -50,7 +50,7 @@ const services: Service[] = [
       "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1550439062-609e1531270e?auto=format&fit=crop&w=1200&q=80",
     ],
-    color: "rgba(16, 185, 129, 0.4)", // Emerald
+    color: "rgba(16, 185, 129, 0.3)", // Emerald
   },
   {
     title: "Cloud Deployment",
@@ -60,7 +60,7 @@ const services: Service[] = [
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1200&q=80",
     ],
-    color: "rgba(245, 158, 11, 0.4)", // Amber
+    color: "rgba(245, 158, 11, 0.3)", // Amber
   },
 ];
 
@@ -82,15 +82,16 @@ function VisualPair({ service, index, setActive }: { service: Service; index: nu
 
   return (
     <motion.div ref={ref} className="relative flex min-h-[80vh] w-full items-center justify-center py-24">
+      {/* Dynamic Glow: Uses the service color with low opacity */}
       <div 
-        className="absolute inset-0 m-auto h-[70%] w-[80%] rounded-[60px] opacity-15 blur-[120px] transition-colors duration-1000"
+        className="absolute inset-0 m-auto h-[70%] w-[80%] rounded-[60px] opacity-20 blur-[120px] transition-colors duration-1000"
         style={{ backgroundColor: service.color }}
       />
       <div className="relative z-10 grid w-full grid-cols-12 gap-0">
-        <motion.div style={{ y: yPrimary }} className="col-span-8 z-20 overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl">
+        <motion.div style={{ y: yPrimary }} className="col-span-8 z-20 overflow-hidden rounded-[2rem] border border-[var(--stroke)] bg-[var(--card-bg)] shadow-2xl">
           <img src={service.images[0]} alt="" className="aspect-[16/10] w-full object-cover" />
         </motion.div>
-        <motion.div style={{ y: ySecondary }} className="col-start-5 col-span-8 -mt-32 z-10 overflow-hidden rounded-[2rem] border border-white/5 shadow-2xl brightness-75">
+        <motion.div style={{ y: ySecondary }} className="col-start-5 col-span-8 -mt-32 z-10 overflow-hidden rounded-[2rem] border border-[var(--stroke)] bg-[var(--card-bg)] shadow-2xl brightness-90 dark:brightness-75">
           <img src={service.images[1]} alt="" className="aspect-[16/10] w-full object-cover" />
         </motion.div>
       </div>
@@ -102,13 +103,12 @@ export function ParallaxServiceGallery() {
   const [active, setActive] = useState<string>(services[0].title);
   const activeService = useMemo(() => services.find((s) => s.title === active) ?? services[0], [active]);
 
-  // Logic to split title for styling: "Web Development" -> "Web" (Bold) "Development" (Italic)
   const titleParts = activeService.title.split(" ");
   const firstWord = titleParts[0];
   const restOfTitle = titleParts.slice(1).join(" ");
 
   return (
-    <section className="relative min-h-screen bg-[#080808] px-8 py-32 text-white">
+    <section className="relative min-h-screen bg-[var(--bg-main,transparent)] px-8 py-32 transition-colors duration-500">
       <div className="mx-auto max-w-7xl lg:flex lg:gap-24">
         
         {/* Left: Sticky Dynamic Content */}
@@ -122,21 +122,23 @@ export function ParallaxServiceGallery() {
               transition={{ duration: 0.4, ease: "circOut" }}
               className="space-y-8"
             >
-              <h2 className="text-6xl font-bold tracking-tighter leading-[0.9]">
+              <h2 className="text-6xl font-bold tracking-tighter leading-[0.9] text-[var(--text-primary)]">
                 {firstWord} <br />
-                <span className="italic font-light text-zinc-400">{restOfTitle}</span>
+                <span className="italic font-light text-[var(--text-secondary)] opacity-70">
+                   {restOfTitle}
+                </span>
               </h2>
               
-              <div className="space-y-4 border-l-2 border-purple-500/30 pl-6">
-                <p className="text-2xl font-medium text-zinc-300">
+              <div className="space-y-4 border-l-2 border-[var(--accent)] pl-6">
+                <p className="text-2xl font-medium text-[var(--text-primary)]">
                   {activeService.summary}
                 </p>
-                <p className="text-base leading-relaxed text-zinc-500 max-w-sm">
+                <p className="text-base leading-relaxed text-[var(--text-secondary)] max-w-sm">
                   {activeService.detail}
                 </p>
               </div>
 
-              <button className="group flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-purple-400">
+              <button className="group flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-[var(--accent)]">
                 View Case Study
                 <span className="transition-transform group-hover:translate-x-2">→</span>
               </button>
