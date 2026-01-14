@@ -3,24 +3,24 @@ import { motion } from "framer-motion";
 
 const services = [
   {
-    title: "Product Strategy",
-    description: "Zero-to-one vision sprints, opportunity maps, and validation loops that keep you shipping with conviction.",
-    tags: ["Vision sprint", "Roadmap ops", "Research"],
+    title: "Custom Websites",
+    description: "Brand-led marketing and product sites with performance budgets, SEO, and launch-ready content systems.",
+    tags: ["Story-first UX", "Headless CMS", "Launch support"],
   },
   {
-    title: "Experience Design",
-    description: "Interface systems, motion, and content that make complex products feel effortless on any device.",
-    tags: ["Design language", "Prototyping", "Accessibility"],
+    title: "Responsive Web Applications",
+    description: "Dashboards, portals, and product surfaces that stay quick and clear across every breakpoint.",
+    tags: ["Next.js + TypeScript", "Design systems", "QA on devices"],
   },
   {
-    title: "Engineering Pods",
-    description: "Senior full-stack squads that deliver cloud-ready, observable, and maintainable builds on short cycles.",
-    tags: ["Next.js", "Edge & AI", "Observability"],
+    title: "Systems & Platforms",
+    description: "Reusable component libraries, design tokens, and multi-brand themes that keep future work consistent.",
+    tags: ["Design ops", "Accessibility", "Documentation"],
   },
   {
-    title: "Growth & Optimization",
-    description: "Experiments, performance tuning, and analytics to keep the product fast and the story resonant.",
-    tags: ["A/B + telemetry", "Web Vitals", "Lifecycle"],
+    title: "Performance & Growth",
+    description: "Speed audits, accessibility fixes, analytics, and experiments to lift conversions without cruft.",
+    tags: ["Core Web Vitals", "Experimentation", "Analytics setup"],
   },
 ];
 
@@ -29,18 +29,18 @@ export function ServicesSection() {
     <section id="services" className="mt-16 space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm font-semibold text-[var(--accent-strong)]">What we do</p>
-          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">Services built for momentum</h2>
+          <p className="text-sm font-semibold text-[var(--accent-strong)]">What we build</p>
+          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">Custom sites, responsive apps, and the systems behind them</h2>
           <p className="max-w-2xl text-[var(--text-secondary)]">
-            From strategy through build, we combine expressive design, motion, and resilient engineering
-            so you can launch faster without sacrificing polish.
+            From first wire to launch, Devdens blends design, content, and modern engineering so your website or product
+            ships fast, loads fast, and feels like you.
           </p>
         </div>
         <Link
           href="#contact"
           className="hidden rounded-full border border-[var(--stroke)] px-4 py-2 text-sm font-semibold text-[var(--text-primary)] transition hover:border-[var(--accent)] hover:text-[var(--accent-strong)] md:inline-flex"
         >
-          Plan a sprint
+          Plan a build
         </Link>
       </div>
       <div className="grid gap-4 md:grid-cols-2">

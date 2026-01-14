@@ -3,19 +3,19 @@ import { motion } from "framer-motion";
 
 const processSteps = [
   {
-    title: "01. Discovery Lab",
-    detail: "We align on outcomes, define the riskiest assumptions, and prototype in under 10 days.",
+    title: "01. Shape the story",
+    detail: "Discovery, content mapping, and the responsive goals for your site or web app.",
     eta: "Week 1",
   },
   {
-    title: "02. Design + Build",
-    detail: "Design system, flows, and full-stack builds land in weekly increments with observable releases.",
-    eta: "Week 2-6",
+    title: "02. Design and prototype",
+    detail: "Interface system, breakpoints, and motion brought to life in a clickable prototype.",
+    eta: "Week 1-2",
   },
   {
-    title: "03. Launch & Learn",
-    detail: "We deploy, monitor, and iterate with experiment tracks and performance budgets baked in.",
-    eta: "Week 7+",
+    title: "03. Build, test, launch",
+    detail: "Next.js and TypeScript builds, QA on real devices, and observability wired in for launch.",
+    eta: "Week 2-5",
   },
 ];
 
@@ -25,16 +25,16 @@ export function ProcessSection() {
       <div className="flex items-center justify-between">
         <div>
           <p className="text-sm font-semibold text-[var(--accent-strong)]">How we work</p>
-          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">A rhythm built for clarity</h2>
+          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">A clear path from idea to responsive launch</h2>
           <p className="max-w-2xl text-[var(--text-secondary)]">
-            Close collaboration, async visibility, and demos that keep stakeholders aligned every week.
+            Close collaboration, async visibility, and demos every week so you can see progress and give feedback quickly.
           </p>
         </div>
         <Link
           href="/services"
           className="hidden rounded-full border border-[var(--stroke)] px-4 py-2 text-sm font-semibold text-[var(--text-primary)] transition hover:border-[var(--accent)] hover:text-[var(--accent-strong)] md:inline-flex"
         >
-          Engagement models
+          See the roadmap
         </Link>
       </div>
       <div className="grid gap-4 md:grid-cols-3">

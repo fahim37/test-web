@@ -6,7 +6,7 @@ export function HomeFooter() {
       <div className="flex flex-col gap-4 rounded-2xl border border-[var(--stroke)] bg-[var(--muted-surface)] px-4 py-4 text-sm text-[var(--text-secondary)] sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <div className="flex items-center gap-3 text-[var(--text-primary)]">
           <div className="h-2 w-2 rounded-full bg-[var(--accent-strong)] shadow-[0_0_0_6px_rgba(14,165,233,0.2)]" />
-          Lumenary Software Aú Crafted in Next.js, Framer Motion, and Three.js
+          Devdens Studio - Custom sites and responsive web apps in Next.js, TypeScript, and motion
         </div>
         <div className="flex gap-4">
           <Link href="/services" className="hover:text-[var(--text-primary)]">

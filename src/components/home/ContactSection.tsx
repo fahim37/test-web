@@ -9,33 +9,33 @@ export function ContactSection() {
           <div className="space-y-4">
             <p className="text-sm font-semibold text-[var(--accent-strong)]">Ready when you are</p>
             <h3 className="text-3xl font-semibold leading-tight sm:text-4xl">
-              Let&apos;s build your next flagship experience.
+              Let&apos;s build your custom website or responsive app.
             </h3>
             <p className="max-w-2xl text-[var(--text-secondary)]">
-              Drop a brief and we&apos;ll share a tailored plan, timelines, and a clickable prototype to react to.
-              Expect a response within one business day.
+              Share a bit about your goals and we&apos;ll reply with a tailored plan, timelines, and what the first
+              clickable checkpoint looks like. Expect a fast response.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
-                href="mailto:hello@lumenary.studio"
+                href="mailto:hello@devdens.studio"
                 className="rounded-full bg-[var(--text-primary)] px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90"
               >
-                hello@lumenary.studio
+                hello@devdens.studio
               </Link>
               <Link
                 href="/contact"
                 className="rounded-full border border-[var(--stroke)] px-5 py-3 text-sm font-semibold text-[var(--text-primary)] transition hover:border-[var(--accent)] hover:text-[var(--accent-strong)]"
               >
-                Share a brief
+                Schedule an intro
               </Link>
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {[
-              { label: "Timezone coverage", value: "Americas + EMEA" },
-              { label: "Engagements", value: "Product squads Aú Rapid sprints" },
-              { label: "Stack", value: "Next.js Aú Edge Aú AIOps" },
-              { label: "Response SLA", value: "<12 hours" },
+              { label: "Timezone coverage", value: "Global remote" },
+              { label: "Engagements", value: "Custom websites / Web apps" },
+              { label: "Stack", value: "Next.js / TypeScript / Framer Motion" },
+              { label: "Response SLA", value: "Under 1 business day" },
             ].map((item) => (
               <div key={item.label} className="rounded-2xl border border-[var(--stroke)] bg-[var(--card-bg)] px-4 py-3">
                 <p className="text-xs uppercase tracking-wide text-[var(--text-secondary)]">{item.label}</p>

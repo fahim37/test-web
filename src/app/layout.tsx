@@ -13,9 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Lumenary Software Studio",
-  description:
-    "Animated Next.js landing for a modern software company with immersive 3D, parallax, and dual themes.",
+  title: "Devdens Studio - Custom Websites and Responsive Web Apps",
+  description: "Portfolio site for Devdens, a studio building bespoke websites and responsive web applications on modern stacks.",
 };
 
 const setInitialTheme = `

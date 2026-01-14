@@ -40,7 +40,7 @@ export function HomeHeader() {
             animate={{ scale: [1, 1.25, 1], opacity: [0.85, 1, 0.85] }}
             transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
           />
-          Lumenary Software
+          Devdens
         </motion.div>
 
         <nav className="hidden flex-1 flex-wrap items-center justify-center gap-4 text-sm font-medium text-[var(--text-secondary)] md:flex">
@@ -71,7 +71,7 @@ export function HomeHeader() {
               href="#contact"
               className="hidden rounded-full bg-[var(--text-primary)] px-4 py-2 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(0,0,0,0.18)] transition hover:shadow-[0_16px_40px_rgba(0,0,0,0.22)] sm:inline-flex"
             >
-              Book a workshop
+              Plan a build
             </Link>
           </motion.div>
         </div>

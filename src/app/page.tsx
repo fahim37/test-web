@@ -7,7 +7,8 @@ import { HeroSection } from "@/components/home/HeroSection";
 import { HomeFooter } from "@/components/home/HomeFooter";
 import { HomeHeader } from "@/components/home/Header";
 import { ProcessSection } from "@/components/home/ProcessSection";
-import ServicesParallaxSection from "@/components/ServicesParallaxSection";
+import { ServicesSection } from "@/components/home/ServicesSection";
+import { ParallaxServiceGallery } from "@/components/home/ParallaxServiceGallery";
 
 export default function Home() {
   return (
@@ -15,10 +16,11 @@ export default function Home() {
       <div className="relative mx-auto max-w-6xl px-5 pb-24 sm:px-8 lg:px-12">
         <HomeHeader />
         <HeroSection />
-        {/* <ServicesParallaxSection /> */}
+        {/* <ServicesSection /> */}
         <section id="work" className="mt-24 sm:mt-32">
           <StackedProjects />
         </section>
+        <ParallaxServiceGallery />
         <ClientLogos />
         <ProcessSection />
         <ContactSection />
