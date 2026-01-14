@@ -40,7 +40,7 @@ export function HomeHeader() {
             animate={{ scale: [1, 1.25, 1], opacity: [0.85, 1, 0.85] }}
             transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
           />
-          Devdens
+          Devsden
         </motion.div>
 
         <nav className="hidden flex-1 flex-wrap items-center justify-center gap-4 text-sm font-medium text-[var(--text-secondary)] md:flex">
