@@ -7,7 +7,6 @@ import { HeroSection } from "@/components/home/HeroSection";
 import { HomeFooter } from "@/components/home/HomeFooter";
 import { HomeHeader } from "@/components/home/Header";
 import { ProcessSection } from "@/components/home/ProcessSection";
-import { ServicesSection } from "@/components/home/ServicesSection";
 import { ParallaxServiceGallery } from "@/components/home/ParallaxServiceGallery";
 
 export default function Home() {

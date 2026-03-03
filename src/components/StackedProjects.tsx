@@ -5,6 +5,7 @@ import { ReactLenis } from "lenis/react";
 import Image from "next/image";
 import { useRef } from "react";
 
+// ... [Project type and projects array remain the same as your original]
 type Project = {
   category: string;
   title: string;
@@ -80,157 +81,110 @@ const projects: Project[] = [
 ];
 
 export default function StackedProjects() {
-  const stackRef = useRef<HTMLElement | null>(null);
-
   return (
-    <ReactLenis root options={{ lerp: 0.12, smoothWheel: true, smoothTouch: true }}>
-      <section ref={stackRef} className="relative">
-        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div className="space-y-2">
-            <p className="text-sm font-semibold text-[var(--accent-strong)]">Featured Work</p>
-            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">Recent launches & case studies</h2>
-            <p className="max-w-2xl text-[var(--text-secondary)]">
-              Layered cards with smooth scrolling and motion-driven focus on each story.
-            </p>
+    <ReactLenis root options={{ lerp: 0.1, smoothWheel: true }}>
+      <section className="bg-slate-50 px-4 py-24 sm:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-20">
+            <p className="mb-2 text-sm font-bold uppercase tracking-widest text-blue-600">Selected Works</p>
+            <h2 className="text-5xl font-bold tracking-tight text-slate-900 sm:text-7xl">
+              Case Studies
+            </h2>
           </div>
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="inline-flex items-center gap-2 rounded-full border border-[var(--stroke)] bg-[var(--card-bg)] px-4 py-2 text-xs font-medium text-[var(--text-secondary)]"
-          >
-            Scroll to explore
-            <span className="text-lg">↘</span>
-          </motion.div>
-        </div>
 
-        <div className="relative space-y-10 pb-8 pt-2">
-          {projects.map((project, index) => (
-            <ProjectCard key={project.title} project={project} index={index} />
-          ))}
+          <div className="flex flex-col gap-[10vh]">
+            {projects.map((project, index) => (
+              <ProjectCard 
+                key={project.title} 
+                project={project} 
+                index={index} 
+                total={projects.length}
+              />
+            ))}
+          </div>
         </div>
+        {/* Extra space at bottom so the last card can scroll up */}
+        <div className="h-[30vh]" />
       </section>
     </ReactLenis>
   );
 }
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
-  const ref = useRef<HTMLDivElement | null>(null);
+function ProjectCard({ project, index, total }: { project: Project; index: number; total: number }) {
+  const container = useRef(null);
+  
   const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
+    target: container,
+    offset: ["start start", "end start"],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.96]);
-  const y = useTransform(scrollYProgress, [0, 1], [0, -18]);
-  const stripes = useTransform(scrollYProgress, [0, 1], [0.6, 0.25]);
+  // Calculate scaling: Cards underneath shrink slightly
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.85]);
+  // Calculate opacity: Cards underneath darken as others stack on top
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.6]);
 
   return (
-    <motion.article
-      ref={ref}
-      style={{
-        top: `calc(5.5rem + ${index * 64}px)`,
-        scale,
-        y,
-      }}
-      className="sticky left-0 right-0 overflow-hidden rounded-[32px] shadow-[0_28px_100px_rgba(0,0,0,0.18)] ring-1 ring-black/5"
+    <div 
+      ref={container} 
+      className="sticky top-0 h-fit w-full pt-10"
+      style={{ top: `${80 + (index * 32)}px` }} // Each card stops 32px lower than the previous
     >
-      <div
-        className="absolute inset-0"
-        style={{ background: `linear-gradient(135deg, ${project.palette.from}, ${project.palette.to})` }}
-      />
-      <motion.div
-        className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.36),transparent_32%),radial-gradient(circle_at_80%_0%,rgba(255,255,255,0.22),transparent_30%)]"
-        style={{ opacity: stripes }}
-      />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.28)_0%,rgba(255,255,255,0.08)_35%,rgba(255,255,255,0)_50%,rgba(255,255,255,0.16)_80%)] bg-[length:26px_100%] opacity-45 mix-blend-soft-light" />
-
-      <motion.div
-        whileHover={{ y: -4, scale: 1.003 }}
-        transition={{ type: "spring", stiffness: 280, damping: 24 }}
-        className="relative flex flex-col gap-6 p-6 sm:p-8 lg:p-10 lg:flex-row lg:items-center"
+      <motion.article
+        style={{ scale, opacity }}
+        className="relative overflow-hidden rounded-[40px] border border-black/5 bg-white shadow-2xl transition-shadow duration-500 hover:shadow-black/10"
       >
-        <div className="flex-1 space-y-4 text-slate-900">
-          <div className="inline-flex items-center gap-3 rounded-full bg-white/60 px-4 py-2 text-sm font-medium text-slate-800 shadow-sm backdrop-blur">
-            <span className="text-sm italic text-slate-700">{project.category}</span>
-            <span className="h-1 w-1 rounded-full bg-slate-800/50" />
-            <span className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-700/70">Case Study</span>
-          </div>
-          <h3 className="text-3xl font-semibold leading-tight sm:text-4xl">{project.title}</h3>
-          <p className="max-w-2xl text-[15px] leading-7 text-slate-800/90">
-            {project.description}
-          </p>
-          <div className="grid max-w-xl grid-cols-2 gap-4 text-sm text-slate-800/90 sm:gap-6">
-            <div>
-              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-700/70">Location</p>
-              <p className="text-xl font-semibold text-slate-900">{project.location}</p>
-            </div>
-            <div>
-              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-700/70">Project Duration</p>
-              <p className="text-xl font-semibold text-slate-900">{project.duration}</p>
-            </div>
-            <div>
-              <p className="text-[11px] uppercase tracking-[0.18em] text-slate-700/70">Work Scope</p>
-              <p className="text-xl font-semibold text-slate-900">{project.scope}</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3 rounded-full bg-white/65 px-4 py-2 shadow-sm ring-1 ring-white/50 backdrop-blur">
-            <div className="h-10 w-10 overflow-hidden rounded-full ring-2 ring-white/80">
-              <Image
-                src={project.avatar}
-                alt={project.leadName}
-                width={40}
-                height={40}
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="flex-1 leading-tight">
-              <p className="text-sm font-semibold text-slate-900">{project.leadName}</p>
-              <p className="text-xs font-medium text-slate-700/80">{project.leadRole}</p>
-            </div>
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-black/75 text-white shadow">
-              →
-            </span>
-          </div>
-        </div>
+        {/* Background Gradient */}
+        <div
+          className="absolute inset-0 -z-10"
+          style={{ background: `linear-gradient(145deg, ${project.palette.from}, ${project.palette.to})` }}
+        />
 
-        <motion.div
-          className="relative isolate w-full max-w-[460px] overflow-hidden rounded-[24px] bg-white/55 p-3 shadow-2xl ring-1 ring-white/60 lg:w-[420px]"
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.45, delay: 0.08 }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-white/70 via-transparent to-white/10" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.6),transparent_30%),radial-gradient(circle_at_80%_10%,rgba(255,255,255,0.35),transparent_30%)]" />
-          <motion.div
-            className="relative h-[280px] w-full overflow-hidden rounded-[18px] sm:h-[320px]"
-            initial={{ scale: 1.02 }}
-            whileHover={{ scale: 1.04 }}
-            transition={{ duration: 0.45, ease: "easeOut" }}
-          >
+        <div className="flex flex-col gap-10 p-8 lg:flex-row lg:items-center lg:p-16">
+          {/* Content Section */}
+          <div className="flex-1 space-y-8 text-slate-900">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/40 px-4 py-2 text-xs font-bold uppercase tracking-widest backdrop-blur-md">
+              <span>{project.category}</span>
+            </div>
+            
+            <h3 className="text-4xl font-bold leading-[1.1] sm:text-6xl">{project.title}</h3>
+            
+            <p className="max-w-md text-lg leading-relaxed text-slate-800/80">
+              {project.description}
+            </p>
+
+            <div className="grid grid-cols-2 gap-8 border-t border-black/10 pt-8">
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-700/50">Location</p>
+                <p className="font-semibold">{project.location}</p>
+              </div>
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-700/50">Project Scope</p>
+                <p className="font-semibold">{project.scope}</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4">
+               <div className="relative h-12 w-12 overflow-hidden rounded-full ring-2 ring-white">
+                <Image src={project.avatar} alt={project.leadName} fill className="object-cover" />
+               </div>
+               <div>
+                 <p className="text-sm font-bold">{project.leadName}</p>
+                 <p className="text-xs text-slate-700/70">{project.leadRole}</p>
+               </div>
+            </div>
+          </div>
+
+          {/* Image Section */}
+          <div className="relative aspect-[4/3] w-full flex-1 overflow-hidden rounded-3xl shadow-lg lg:aspect-square">
             <Image
               fill
               src={project.image}
               alt={project.title}
-              className="object-cover"
-              sizes="(min-width: 1024px) 420px, 100vw"
+              className="object-cover transition-transform duration-700 hover:scale-105"
             />
-          </motion.div>
-          <div className="mt-3 flex items-center justify-between text-xs font-medium text-slate-700">
-            <span>Prototype preview</span>
-            <span className="flex items-center gap-1 text-slate-900">
-              View case
-              <motion.span
-                animate={{ x: [0, 4, 0] }}
-                transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
-              >
-                →
-              </motion.span>
-            </span>
           </div>
-        </motion.div>
-      </motion.div>
-    </motion.article>
+        </div>
+      </motion.article>
+    </div>
   );
 }

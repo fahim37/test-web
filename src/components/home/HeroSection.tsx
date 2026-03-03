@@ -1,107 +1,48 @@
+import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 
 export function HeroSection() {
   return (
-    <section id="hero" className="relative mt-12 grid gap-10 lg:grid-cols-[1.05fr,0.95fr] lg:items-center">
-      <div className="space-y-7">
-       
-        <motion.h1
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          className="text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl"
-        >
-          Custom websites and responsive web apps with{" "}
-          <span className="bg-gradient-to-r from-[var(--accent-strong)] via-sky-400 to-[var(--accent-warm)] bg-clip-text text-transparent">
-            modern stacks, precise craft, and measurable results.
+    <section
+      id="hero"
+      className="relative left-1/2 right-1/2 mt-0 w-screen -translate-x-1/2 overflow-hidden"
+      style={{
+        backgroundImage:
+          "linear-gradient(96deg, #eaedf2 0%, #dbe6f7 52%, #8ebaf8 100%), repeating-linear-gradient(90deg, rgba(96, 125, 171, 0.12) 0px, rgba(96, 125, 171, 0.12) 1px, transparent 1px, transparent 104px)",
+      }}
+    >
+      <div className="relative mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20 lg:grid lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16 lg:px-12 lg:py-24">
+        <div className="max-w-xl">
+          <span className="inline-flex rounded-md border border-[#99afd2] bg-white/20 px-3 py-1 text-sm font-medium text-[#1260d3]">
+            Transforming Ideas into Solutions
           </span>
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.65, delay: 0.15 }}
-          className="max-w-2xl text-lg leading-8 text-[var(--text-secondary)]"
-        >
-          We are Devdens: a small studio that designs, builds, and tunes bespoke sites and responsive web applications.
-          Next.js, TypeScript, motion, and accessibility are baked in so your story, product, and conversions all feel
-          intentional across devices.
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap items-center gap-4"
-        >
+          <h1 className="mt-8 text-4xl font-semibold leading-[1.08] tracking-[-0.02em] text-[#070a11] sm:text-5xl lg:text-[62px]">
+            The Smartest Software Solutions for Your Businesses
+          </h1>
+          <p className="mt-8 max-w-md text-lg leading-8 text-[#5b6477]">
+            We design, develop, and deliver scalable digital solutions tailored to your business needs.
+          </p>
           <Link
             href="#contact"
-            className="rounded-full bg-[var(--accent-strong)] px-5 py-3 text-sm font-semibold text-white shadow-[var(--shadow-soft)] transition hover:brightness-110"
+            className="mt-10 inline-flex rounded-xl bg-[#1462e5] px-9 py-3.5 text-lg font-semibold text-white shadow-[0_14px_28px_rgba(20,98,229,0.3)] transition hover:bg-[#0f57ce]"
           >
-            Start a project
+            Lets Discuss
           </Link>
-          <Link
-            href="#work"
-            className="rounded-full border border-[var(--stroke)] px-5 py-3 text-sm font-semibold text-[var(--text-primary)] transition hover:border-[var(--accent)] hover:text-[var(--accent-strong)]"
-          >
-            View our work
-          </Link>
-          <div className="flex items-center gap-3 rounded-full border border-[var(--stroke)] px-4 py-2 text-sm text-[var(--text-secondary)]">
-            <span className="h-2.5 w-2.5 rounded-full bg-[var(--accent-warm)] shadow-[0_0_0_6px_rgba(249,115,22,0.15)]" />
-            Responsive-first, weekly build drops.
+        </div>
+
+        <div className="mt-12 lg:mt-0">
+          <div className="overflow-hidden rounded-[24px] border-[10px] border-[#5e84c8] bg-[#bdd1ee] shadow-[0_22px_40px_rgba(57,86,135,0.28)]">
+            <Image
+              src="/hero-software.jpg"
+              alt="Developer writing code on dual monitors"
+              width={1800}
+              height={1200}
+              priority
+              className="h-full w-full object-cover"
+            />
           </div>
-        </motion.div>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-          {[
-            { label: "Bespoke launches", value: "45+ custom builds" },
-            { label: "Responsive coverage", value: "Mobile to 4K verified" },
-            { label: "First clickable review", value: "Under 72 hours" },
-          ].map((stat) => (
-            <div
-              key={stat.label}
-              className="glass rounded-2xl px-4 py-3 text-sm text-[var(--text-secondary)]"
-            >
-              <p className="text-xs uppercase tracking-wide text-[var(--text-secondary)]">{stat.label}</p>
-              <p className="text-xl font-semibold text-[var(--text-primary)]">{stat.value}</p>
-            </div>
-          ))}
         </div>
       </div>
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.15 }}
-        className="relative"
-      >
-        <div className="absolute -left-10 -top-8 h-28 w-28 rounded-full bg-[var(--accent)]/10 blur-2xl" />
-        <div className="glass relative space-y-4 rounded-3xl border border-[var(--stroke)] bg-[var(--card-bg)] p-6 shadow-[var(--shadow-soft)]">
-          <p className="text-sm font-semibold text-[var(--accent-strong)]">What we build at Devdens</p>
-          <div className="space-y-3 text-[var(--text-secondary)]">
-            {[
-              {
-                title: "Custom websites",
-                detail: "Brand-led storytelling with performance budgets, CMS handoff, and launch support.",
-              },
-              {
-                title: "Responsive web applications",
-                detail: "Dashboards, portals, and product experiences that stay quick on any screen.",
-              },
-              {
-                title: "Modern tech stacks",
-                detail: "Next.js, TypeScript, edge delivery, analytics, and accessibility baked in from day one.",
-              },
-            ].map((item) => (
-              <div key={item.title} className="space-y-1 rounded-2xl border border-[var(--stroke)]/80 bg-[var(--muted-surface)] px-4 py-3">
-                <p className="font-semibold text-[var(--text-primary)]">{item.title}</p>
-                <p className="text-sm">{item.detail}</p>
-              </div>
-            ))}
-          </div>
-          <div className="h-px w-full bg-gradient-to-r from-transparent via-[var(--stroke)] to-transparent" />
-          <p className="text-sm font-mono text-[var(--accent-strong)]">
-            Crafted with responsive QA, observability, and care.
-          </p>
-        </div>
-      </motion.div>
     </section>
   );
 }

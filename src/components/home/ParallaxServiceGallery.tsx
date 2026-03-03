@@ -118,7 +118,7 @@ export function ParallaxServiceGallery() {
   const restOfTitle = titleParts.slice(1).join(" ");
 
   return (
-    <section className="relative min-h-screen bg-[var(--bg-main)] px-6 py-20 lg:px-8 lg:py-32">
+    <section id="services" className="relative min-h-screen bg-[var(--bg-main)] px-6 py-20 lg:px-8 lg:py-32">
       <div className="mx-auto max-w-7xl lg:flex lg:gap-24">
         
         {/* Desktop-Only Sticky Sidebar (Hidden on Mobile) */}

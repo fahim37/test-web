@@ -1,77 +1,100 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import ThemeToggle from "@/components/ThemeToggle";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import Image from "next/image";
 
 const navLinks = [
+  { href: "#hero", label: "Home" },
   { href: "#services", label: "Services" },
   { href: "#work", label: "Projects" },
   { href: "#approach", label: "Approach" },
   { href: "#contact", label: "Contact" },
 ];
 
+const heroGradient =
+  "linear-gradient(96deg, #eaedf2 0%, #dbe6f7 52%, #8ebaf8 100%)";
+
 export function HomeHeader() {
-  const { scrollYProgress } = useScroll();
-  const elevation = useTransform(scrollYProgress, [0, 0.08], [0, 1]);
-  const headerScale = useTransform(scrollYProgress, [0, 0.08], [1, 0.995]);
-  const shadow = useTransform(elevation, [0, 1], ["0 18px 50px rgba(0,0,0,0)", "0 18px 50px rgba(0,0,0,0.08)"]);
-  const border = useTransform(elevation, [0, 1], ["rgba(255,255,255,0.3)", "rgba(255,255,255,0.55)"]);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setIsScrolled(latest > 28);
+  });
 
   return (
     <motion.header
-      className="sticky top-4 z-30"
-      style={{ scale: headerScale }}
+      className="fixed inset-x-0 top-0 z-50"
+      initial={{ opacity: 0, y: -14 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.38, ease: "easeOut" }}
     >
       <motion.div
-        style={{ boxShadow: shadow, borderColor: border }}
-        className="glass flex flex-wrap items-center gap-3 rounded-2xl border px-4 py-3 backdrop-blur-lg sm:px-6 md:flex-nowrap md:gap-4"
-        initial={{ opacity: 0, y: -12, scale: 0.98 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
+        className="relative overflow-hidden border-b px-4 py-3 sm:px-6"
+        animate={{
+          borderColor: isScrolled ? "rgba(15, 23, 42, 0.12)" : "rgba(255, 255, 255, 0)",
+          boxShadow: isScrolled ? "0 12px 28px rgba(18, 39, 70, 0.1)" : "0 0 0 rgba(0,0,0,0)",
+        }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
       >
+        <div className="pointer-events-none absolute inset-0" style={{ backgroundImage: heroGradient }} />
         <motion.div
-          className="flex min-w-0 items-center gap-2 rounded-xl bg-[var(--accent)]/12 px-3 py-1 text-sm font-semibold text-[var(--accent-strong)] shadow-sm"
-          whileHover={{ y: -2, scale: 1.01 }}
-          transition={{ type: "spring", stiffness: 260, damping: 18 }}
-        >
-          <motion.span
-            className="h-2 w-2 rounded-full bg-[var(--accent)] shadow-[0_0_0_6px_rgba(14,165,233,0.2)]"
-            animate={{ scale: [1, 1.25, 1], opacity: [0.85, 1, 0.85] }}
-            transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
-          />
-          Devsden
-        </motion.div>
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-white"
+          animate={{ opacity: isScrolled ? 0.96 : 0 }}
+          transition={{ duration: 0.28, ease: "easeOut" }}
+        />
+        <motion.div
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          animate={{ backgroundPositionX: [0, 200], opacity: isScrolled ? 0 : 0.25 }}
+          transition={{
+            backgroundPositionX: { duration: 16, repeat: Infinity, ease: "linear" },
+            opacity: { duration: 0.25, ease: "easeOut" },
+          }}
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(90deg, rgba(84, 116, 163, 0.2) 0px, rgba(84, 116, 163, 0.2) 1px, transparent 1px, transparent 100px)",
+            backgroundSize: "200px 100%",
+          }}
+        />
 
-        <nav className="hidden flex-1 flex-wrap items-center justify-center gap-4 text-sm font-medium text-[var(--text-secondary)] md:flex">
-          {navLinks.map((link) => (
-            <motion.div key={link.href} whileHover={{ y: -2 }}>
-              <Link
-                href={link.href}
-                className="relative px-2 py-1 transition text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
-              >
-                {link.label}
-                <motion.span
-                  className="absolute inset-x-0 -bottom-1 h-0.5 rounded-full bg-[var(--accent-strong)]"
-                  initial={{ scaleX: 0, opacity: 0 }}
-                  whileHover={{ scaleX: 1, opacity: 1 }}
-                  transition={{ duration: 0.2, ease: "easeOut" }}
-                />
-              </Link>
-            </motion.div>
-          ))}
-        </nav>
+        <div className="relative mx-auto flex w-full max-w-6xl items-center justify-between gap-4">
+          <Link href="#hero" className="flex items-center gap-2.5">
+            <Image
+              src="/ddt-logo.png"
+              alt="Company Logo"
+              width={1000}
+              height={1000}
+              className="w-full h-[40px] object-cover"
+            />
+          </Link>
 
-        <div className="flex items-center gap-3">
-          <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.96 }}>
-            <ThemeToggle />
-          </motion.div>
-          <motion.div whileHover={{ y: -1, scale: 1.02 }} whileTap={{ scale: 0.97 }}>
+          <nav className="hidden flex-1 items-center justify-center gap-9 md:flex">
+            {navLinks.map((link) => (
+              <motion.div key={link.href} whileHover={{ y: -1 }} transition={{ duration: 0.2 }}>
+                <Link
+                  href={link.href}
+                  className="group relative inline-flex rounded-full px-3 py-1.5 text-[15px] font-semibold tracking-[-0.01em] text-[#10203f] transition-colors hover:text-[#0f57ce]"
+                >
+                  <span
+                    className="absolute inset-0 -z-10 rounded-full opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                    style={{ backgroundColor: isScrolled ? "rgba(15, 23, 42, 0.06)" : "rgba(255, 255, 255, 0.56)" }}
+                  />
+                  {link.label}
+                </Link>
+              </motion.div>
+            ))}
+          </nav>
+
+          <motion.div whileHover={{ y: -1, scale: 1.02 }} whileTap={{ scale: 0.98 }}>
             <Link
               href="#contact"
-              className="hidden rounded-full bg-[var(--text-primary)] px-4 py-2 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(0,0,0,0.18)] transition hover:shadow-[0_16px_40px_rgba(0,0,0,0.22)] sm:inline-flex"
+              className="rounded-lg bg-[#0e5ee0] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(13,79,191,0.35)] transition hover:bg-[#0a55d1]"
             >
-              Plan a build
+              Log in/Sign up
             </Link>
           </motion.div>
         </div>
