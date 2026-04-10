@@ -14,7 +14,7 @@ const navLinks = [
 ];
 
 const heroGradient =
-  "linear-gradient(96deg, #eaedf2 0%, #dbe6f7 52%, #8ebaf8 100%)";
+  "linear-gradient(96deg, rgba(255, 255, 255, 0.98) 0%, rgba(242, 247, 255, 0.98) 56%, rgba(255, 246, 237, 0.98) 100%)";
 
 export function HomeHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -34,8 +34,8 @@ export function HomeHeader() {
       <motion.div
         className="relative overflow-hidden border-b px-4 py-3 sm:px-6"
         animate={{
-          borderColor: isScrolled ? "rgba(15, 23, 42, 0.12)" : "rgba(255, 255, 255, 0)",
-          boxShadow: isScrolled ? "0 12px 28px rgba(18, 39, 70, 0.1)" : "0 0 0 rgba(0,0,0,0)",
+          borderColor: isScrolled ? "rgba(10, 14, 20, 0.08)" : "rgba(255, 255, 255, 0)",
+          boxShadow: isScrolled ? "0 12px 28px rgba(10, 14, 20, 0.08)" : "0 0 0 rgba(0,0,0,0)",
         }}
         transition={{ duration: 0.3, ease: "easeOut" }}
       >
@@ -43,7 +43,7 @@ export function HomeHeader() {
         <motion.div
           aria-hidden
           className="pointer-events-none absolute inset-0 bg-white"
-          animate={{ opacity: isScrolled ? 0.96 : 0 }}
+          animate={{ opacity: isScrolled ? 0.98 : 0 }}
           transition={{ duration: 0.28, ease: "easeOut" }}
         />
         <motion.div
@@ -56,7 +56,7 @@ export function HomeHeader() {
           }}
           style={{
             backgroundImage:
-              "repeating-linear-gradient(90deg, rgba(84, 116, 163, 0.2) 0px, rgba(84, 116, 163, 0.2) 1px, transparent 1px, transparent 100px)",
+              "repeating-linear-gradient(90deg, rgba(10, 14, 20, 0.06) 0px, rgba(10, 14, 20, 0.06) 1px, transparent 1px, transparent 100px)",
             backgroundSize: "200px 100%",
           }}
         />
@@ -77,11 +77,11 @@ export function HomeHeader() {
               <motion.div key={link.href} whileHover={{ y: -1 }} transition={{ duration: 0.2 }}>
                 <Link
                   href={link.href}
-                  className="group relative inline-flex rounded-full px-3 py-1.5 text-[15px] font-semibold tracking-[-0.01em] text-[#10203f] transition-colors hover:text-[#0f57ce]"
+                  className="group relative inline-flex rounded-full px-3 py-1.5 text-[15px] font-semibold tracking-[-0.01em] text-[var(--text-primary)] transition-colors hover:text-[var(--accent)]"
                 >
                   <span
                     className="absolute inset-0 -z-10 rounded-full opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-                    style={{ backgroundColor: isScrolled ? "rgba(15, 23, 42, 0.06)" : "rgba(255, 255, 255, 0.56)" }}
+                    style={{ backgroundColor: isScrolled ? "rgba(10, 14, 20, 0.04)" : "rgba(255, 255, 255, 0.72)" }}
                   />
                   {link.label}
                 </Link>
@@ -92,7 +92,7 @@ export function HomeHeader() {
           <motion.div whileHover={{ y: -1, scale: 1.02 }} whileTap={{ scale: 0.98 }}>
             <Link
               href="#contact"
-              className="rounded-lg bg-[#0e5ee0] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(13,79,191,0.35)] transition hover:bg-[#0a55d1]"
+              className="rounded-lg bg-[var(--text-primary)] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(10,14,20,0.16)] transition hover:bg-[var(--accent)]"
             >
               Log in/Sign up
             </Link>

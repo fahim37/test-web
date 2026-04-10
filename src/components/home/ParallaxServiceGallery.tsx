@@ -20,7 +20,7 @@ const services: Service[] = [
       "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1531403001884-46a97b0aae3e?auto=format&fit=crop&w=1200&q=80",
     ],
-    color: "rgba(59, 130, 246, 0.3)",
+    color: "rgba(3, 95, 232, 0.18)",
   },
   {
     title: "UI/UX Development",
@@ -30,7 +30,7 @@ const services: Service[] = [
       "https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=1200&q=80",
     ],
-    color: "rgba(168, 85, 247, 0.3)",
+    color: "rgba(255, 111, 0, 0.16)",
   },
   {
     title: "Backend Development",
@@ -40,7 +40,7 @@ const services: Service[] = [
       "https://images.unsplash.com/photo-1558494949-ef010cbdcc51?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1623282030075-e28c728f9748?auto=format&fit=crop&w=1200&q=80",
     ],
-    color: "rgba(239, 68, 68, 0.3)",
+    color: "rgba(2, 72, 182, 0.18)",
   },
   {
     title: "Frontend Development",
@@ -50,7 +50,7 @@ const services: Service[] = [
       "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1550439062-609e1531270e?auto=format&fit=crop&w=1200&q=80",
     ],
-    color: "rgba(16, 185, 129, 0.3)",
+    color: "rgba(255, 111, 0, 0.12)",
   },
   {
     title: "Cloud Support",
@@ -60,7 +60,7 @@ const services: Service[] = [
       "https://images.unsplash.com/photo-1597733336794-12d05021d510?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
     ],
-    color: "rgba(245, 158, 11, 0.3)",
+    color: "rgba(10, 14, 20, 0.12)",
   },
 ];
 
@@ -118,7 +118,7 @@ export function ParallaxServiceGallery() {
   const restOfTitle = titleParts.slice(1).join(" ");
 
   return (
-    <section id="services" className="relative min-h-screen bg-[var(--bg-main)] px-6 py-20 lg:px-8 lg:py-32">
+    <section id="services" className="relative min-h-screen bg-[var(--page-bg)] px-6 py-20 lg:px-8 lg:py-32">
       <div className="mx-auto max-w-7xl lg:flex lg:gap-24">
         
         {/* Desktop-Only Sticky Sidebar (Hidden on Mobile) */}

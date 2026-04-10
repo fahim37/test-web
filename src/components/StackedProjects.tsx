@@ -5,18 +5,15 @@ import { ReactLenis } from "lenis/react";
 import Image from "next/image";
 import { useRef } from "react";
 
-// ... [Project type and projects array remain the same as your original]
 type Project = {
   category: string;
   title: string;
-  description: string;
-  location: string;
-  duration: string;
+  problem: string;
+  solution: string;
   scope: string;
-  leadName: string;
-  leadRole: string;
+  tech: string;
   image: string;
-  avatar: string;
+  link: string;
   palette: {
     from: string;
     to: string;
@@ -27,67 +24,59 @@ type Project = {
 
 const projects: Project[] = [
   {
-    category: "Restaurant",
-    title: "Transform Your Dining",
-    description: "Plate pairs premium restaurants with curated discovery, loyalty, and seamless table-side checkout.",
-    location: "France",
-    duration: "5 Months",
-    scope: "Mobile App",
-    leadName: "Neil Saidi",
-    leadRole: "Plate CEO",
-    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1100&q=80",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&auto=format&fit=crop&q=60",
-    palette: { from: "#ffb3b8", to: "#ff9ec2", accent: "#ff6f61", text: "#1c1c28" },
+    category: "Security",
+    title: "Royal House Check",
+    problem: "Property owners and managers needed reliable, accessible security coverage that provides peace of mind around the clock — without complex processes or lengthy wait times.",
+    solution: "We built a 24/7 security patrol platform with a digital dashboard for instant incident updates, secure footage access, and flexible scheduling managed by vetted field teams.",
+    scope: "Web Platform",
+    tech: "Next.js / Vercel",
+    image: "/lhr-zbr9.vercel.app.png",
+    link: "https://lhr-zbr9.vercel.app/",
+    palette: { from: "#ffffff", to: "#e8f0ff", accent: "#035FE8", text: "#0A0E14" },
   },
   {
-    category: "Travel",
-    title: "Curated Journeys",
-    description: "A travel OS with dynamic itineraries, live concierge, and carbon-friendly routing across regions.",
-    location: "Portugal",
-    duration: "8 Weeks",
-    scope: "Web & Mobile",
-    leadName: "Maya Patel",
-    leadRole: "Product Lead",
-    image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1100&auto=format&fit=crop&q=80",
-    avatar: "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?w=200&auto=format&fit=crop&q=60",
-    palette: { from: "#b8c7ff", to: "#9ad3ff", accent: "#4b7bff", text: "#10223b" },
+    category: "Community",
+    title: "Walk Throughz",
+    problem: "People experience their cities as tourists or commuters, missing authentic connections to the local businesses and communities that make neighborhoods unique.",
+    solution: "We created a platform for guided small-group experiences led by local business owners — letting users browse, book, and discover the stories behind independent shops, galleries, and cafes.",
+    scope: "Web Application",
+    tech: "Next.js / Vercel",
+    image: "/httpsnkp-delta.vercel.app.png",
+    link: "https://nkp-delta.vercel.app/",
+    palette: { from: "#fff8f1", to: "#ffe1c4", accent: "#FF6F00", text: "#0F1218" },
   },
   {
-    category: "Healthcare",
-    title: "Revolutionize Fitness Goals",
-    description: "Fitmate blends AI coaching, biometric sync, and playful streaks to keep members consistently engaged.",
-    location: "Australia",
-    duration: "12 Weeks",
-    scope: "Mobile Platform",
-    leadName: "Shubho Al-Farooque",
-    leadRole: "Founder",
-    image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1100&auto=format&fit=crop&q=80",
-    avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&auto=format&fit=crop&q=60",
-    palette: { from: "#b5f1ff", to: "#43e0d0", accent: "#16b3a3", text: "#0a1c26" },
+    category: "Agriculture",
+    title: "Table Fresh",
+    problem: "A growing disconnect between consumers and their food sources meant seasonal, locally-grown produce was hard to find and even harder to trust.",
+    solution: "We designed a farm-to-table marketplace that lets customers browse nearby growers, compare seasonal availability, and build direct relationships with local producers — cutting out the middlemen.",
+    scope: "Web Platform",
+    tech: "Next.js / Vercel",
+    image: "/lhr-fxm5.vercel.app.png",
+    link: "https://lhr-fxm5.vercel.app/",
+    palette: { from: "#f0fff4", to: "#d4edda", accent: "#1B8332", text: "#0A0E14" },
   },
   {
-    category: "SaaS",
-    title: "Simplifying Vehicle Care",
-    description: "Zantrik modernizes fleet maintenance with gamified checklists, predictive alerts, and instant claims.",
-    location: "UAE",
-    duration: "10 Weeks",
+    category: "SaaS / Automation",
+    title: "SAEMA",
+    problem: "Organizations were drowning in repetitive manual work, inefficient handoffs, and operational bottlenecks that kept teams from focusing on strategic decisions.",
+    solution: "We engineered workflow automation and AI-powered operational tools — combining consulting with engineering to deliver maintainable, scalable systems that teams can actually adopt long-term.",
     scope: "Product Suite",
-    leadName: "Alia Khan",
-    leadRole: "Ops Lead",
-    image: "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?w=1100&auto=format&fit=crop&q=80",
-    avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=200&auto=format&fit=crop&q=60",
-    palette: { from: "#ffe5a3", to: "#ffc270", accent: "#f19b38", text: "#2b1800" },
+    tech: "Next.js / Vercel",
+    image: "/sm-ml.vercel.app.png",
+    link: "https://sm-ml.vercel.app/",
+    palette: { from: "#f8f5ff", to: "#e8dff5", accent: "#7C3AED", text: "#11151C" },
   },
 ];
 
 export default function StackedProjects() {
   return (
     <ReactLenis root options={{ lerp: 0.1, smoothWheel: true }}>
-      <section className="bg-slate-50 px-4 py-24 sm:px-8">
+      <section className="bg-[var(--page-bg)] px-4 py-24 sm:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="mb-20">
-            <p className="mb-2 text-sm font-bold uppercase tracking-widest text-blue-600">Selected Works</p>
-            <h2 className="text-5xl font-bold tracking-tight text-slate-900 sm:text-7xl">
+            <p className="mb-2 text-sm font-bold uppercase tracking-widest text-[var(--accent-strong)]">Selected Works</p>
+            <h2 className="text-5xl font-bold tracking-tight text-[var(--text-primary)] sm:text-7xl">
               Case Studies
             </h2>
           </div>
@@ -97,8 +86,7 @@ export default function StackedProjects() {
               <ProjectCard 
                 key={project.title} 
                 project={project} 
-                index={index} 
-                total={projects.length}
+                index={index}
               />
             ))}
           </div>
@@ -110,7 +98,7 @@ export default function StackedProjects() {
   );
 }
 
-function ProjectCard({ project, index, total }: { project: Project; index: number; total: number }) {
+function ProjectCard({ project, index }: { project: Project; index: number }) {
   const container = useRef(null);
   
   const { scrollYProgress } = useScroll({
@@ -131,7 +119,7 @@ function ProjectCard({ project, index, total }: { project: Project; index: numbe
     >
       <motion.article
         style={{ scale, opacity }}
-        className="relative overflow-hidden rounded-[40px] border border-black/5 bg-white shadow-2xl transition-shadow duration-500 hover:shadow-black/10"
+        className="relative overflow-hidden rounded-[40px] border border-[var(--stroke)] bg-white shadow-[0_24px_60px_rgba(10,14,20,0.12)] transition-shadow duration-500 hover:shadow-[0_28px_70px_rgba(10,14,20,0.16)]"
       >
         {/* Background Gradient */}
         <div
@@ -141,24 +129,31 @@ function ProjectCard({ project, index, total }: { project: Project; index: numbe
 
         <div className="flex flex-col gap-10 p-8 lg:flex-row lg:items-center lg:p-16">
           {/* Content Section */}
-          <div className="flex-1 space-y-8 text-slate-900">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/40 px-4 py-2 text-xs font-bold uppercase tracking-widest backdrop-blur-md">
+          <div className="flex-1 space-y-8 text-[var(--text-primary)]">
+            <div
+              className="inline-flex items-center gap-2 rounded-full border bg-white/70 px-4 py-2 text-xs font-bold uppercase tracking-widest backdrop-blur-md"
+              style={{ borderColor: `${project.palette.accent}26`, color: project.palette.accent }}
+            >
               <span>{project.category}</span>
             </div>
             
             <h3 className="text-4xl font-bold leading-[1.1] sm:text-6xl">{project.title}</h3>
             
-            <p className="max-w-md text-lg leading-relaxed text-slate-800/80">
+            <p className="max-w-md text-lg leading-relaxed text-[var(--text-secondary)]">
               {project.description}
             </p>
 
             <div className="grid grid-cols-2 gap-8 border-t border-black/10 pt-8">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-700/50">Location</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: project.palette.accent }}>
+                  Location
+                </p>
                 <p className="font-semibold">{project.location}</p>
               </div>
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-700/50">Project Scope</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: project.palette.accent }}>
+                  Project Scope
+                </p>
                 <p className="font-semibold">{project.scope}</p>
               </div>
             </div>
@@ -169,7 +164,7 @@ function ProjectCard({ project, index, total }: { project: Project; index: numbe
                </div>
                <div>
                  <p className="text-sm font-bold">{project.leadName}</p>
-                 <p className="text-xs text-slate-700/70">{project.leadRole}</p>
+                 <p className="text-xs text-[var(--text-secondary)]">{project.leadRole}</p>
                </div>
             </div>
           </div>

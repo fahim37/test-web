@@ -32,12 +32,9 @@ const MoonIcon = () => (
 export default function ThemeToggle({ className }: { className?: string }) {
   const subscribe = useCallback((onChange: () => void) => {
     if (typeof window === "undefined") return () => undefined;
-    const media = window.matchMedia("(prefers-color-scheme: dark)");
-    media.addEventListener("change", onChange);
     window.addEventListener("storage", onChange);
     window.addEventListener("theme-change", onChange);
     return () => {
-      media.removeEventListener("change", onChange);
       window.removeEventListener("storage", onChange);
       window.removeEventListener("theme-change", onChange);
     };
@@ -46,8 +43,7 @@ export default function ThemeToggle({ className }: { className?: string }) {
   const getSnapshot = useCallback((): Theme => {
     if (typeof window === "undefined") return "light";
     const stored = window.localStorage.getItem("theme-preference") as Theme | null;
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    return stored === "light" || stored === "dark" ? stored : prefersDark ? "dark" : "light";
+    return stored === "light" || stored === "dark" ? stored : "light";
   }, []);
 
   const theme = useSyncExternalStore(subscribe, getSnapshot, () => "light");
