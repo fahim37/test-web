@@ -12,11 +12,10 @@ import { ParallaxServiceGallery } from "@/components/home/ParallaxServiceGallery
 export default function Home() {
   return (
     <div className="relative min-h-screen bg-[var(--page-bg)] text-[var(--text-primary)]">
-      <div className="relative mx-auto max-w-6xl px-5 pb-24 sm:px-8 lg:px-12">
-        <HomeHeader />
-        <HeroSection />
-        {/* <ServicesSection /> */}
-        <section id="work" className="mt-24 sm:mt-32">
+      <HomeHeader />
+      <HeroSection />
+      <div className="relative mx-auto max-w-6xl px-5 sm:px-8 lg:px-12">
+        <section id="work">
           <StackedProjects />
         </section>
         <ParallaxServiceGallery />

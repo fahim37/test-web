@@ -72,12 +72,12 @@ export function HomeHeader() {
             />
           </Link>
 
-          <nav className="hidden flex-1 items-center justify-center gap-9 md:flex">
+          <nav className="hidden flex-1 items-center justify-center gap-1 md:flex">
             {navLinks.map((link) => (
               <motion.div key={link.href} whileHover={{ y: -1 }} transition={{ duration: 0.2 }}>
                 <Link
                   href={link.href}
-                  className="group relative inline-flex rounded-full px-3 py-1.5 text-[15px] font-semibold tracking-[-0.01em] text-[var(--text-primary)] transition-colors hover:text-[var(--accent)]"
+                  className="group relative inline-flex rounded-full px-3.5 py-2 text-sm font-medium tracking-[-0.01em] text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
                 >
                   <span
                     className="absolute inset-0 -z-10 rounded-full opacity-0 transition-opacity duration-200 group-hover:opacity-100"
@@ -92,9 +92,9 @@ export function HomeHeader() {
           <motion.div whileHover={{ y: -1, scale: 1.02 }} whileTap={{ scale: 0.98 }}>
             <Link
               href="#contact"
-              className="rounded-lg bg-[var(--text-primary)] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(10,14,20,0.16)] transition hover:bg-[var(--accent)]"
+              className="rounded-lg bg-[var(--text-primary)] px-5 py-2 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(10,14,20,0.12)] transition hover:bg-[var(--accent)]"
             >
-              Log in/Sign up
+              Get in Touch
             </Link>
           </motion.div>
         </div>

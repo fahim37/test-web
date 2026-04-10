@@ -84,10 +84,10 @@ function VisualPair({ service, index, setActive }: { service: Service; index: nu
   return (
     <motion.div ref={ref} className="relative flex flex-col items-start justify-center py-16 lg:min-h-[90vh] lg:py-24">
       {/* Mobile-Only Text (Visible below 1024px) */}
-      <div className="mb-10 block w-full lg:hidden">
-        <span className="text-xs font-bold uppercase tracking-widest text-[var(--accent)]">0{index + 1} / Service</span>
-        <h3 className="mt-2 text-4xl font-bold text-[var(--text-primary)]">{service.title}</h3>
-        <p className="mt-4 text-xl text-[var(--text-secondary)]">{service.summary}</p>
+      <div className="mb-8 block w-full lg:hidden">
+        <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-[var(--accent)]">0{index + 1} / Service</span>
+        <h3 className="mt-2 text-2xl font-bold tracking-tight text-[var(--text-primary)] sm:text-3xl">{service.title}</h3>
+        <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">{service.summary}</p>
       </div>
 
       {/* The Visual Stack */}
@@ -118,43 +118,43 @@ export function ParallaxServiceGallery() {
   const restOfTitle = titleParts.slice(1).join(" ");
 
   return (
-    <section id="services" className="relative min-h-screen bg-[var(--page-bg)] px-6 py-20 lg:px-8 lg:py-32">
-      <div className="mx-auto max-w-7xl lg:flex lg:gap-24">
-        
-        {/* Desktop-Only Sticky Sidebar (Hidden on Mobile) */}
-        <div className="hidden lg:sticky lg:top-40 lg:block lg:h-fit lg:w-[450px] lg:flex-shrink-0">
+    <section id="services" className="relative min-h-screen pt-28 pb-20 sm:pt-36 lg:pb-32">
+      <div className="mx-auto lg:flex lg:gap-16">
+
+        {/* Desktop-Only Sticky Sidebar */}
+        <div className="hidden lg:sticky lg:top-40 lg:block lg:h-fit lg:w-[400px] lg:flex-shrink-0">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeService.title}
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -16 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 20 }}
-              className="space-y-10"
+              exit={{ opacity: 0, x: 16 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              className="space-y-8"
             >
-              <div className="space-y-2">
-                <span className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--accent)]">Our Expertise</span>
-                <h2 className="text-7xl font-bold tracking-tighter leading-[0.85] text-[var(--text-primary)]">
+              <div className="space-y-3">
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">Our Expertise</span>
+                <h2 className="text-[clamp(2.5rem,4vw,3.5rem)] font-bold tracking-tight leading-[0.9] text-[var(--text-primary)]">
                   {firstWord} <br />
-                  <span className="italic font-light text-[var(--text-secondary)] opacity-60">{restOfTitle}</span>
+                  <span className="italic font-light text-[var(--text-secondary)] opacity-50">{restOfTitle}</span>
                 </h2>
               </div>
-              
-              <div className="space-y-5 border-l-2 border-[var(--accent)] pl-8">
-                <p className="text-2xl font-medium text-[var(--text-primary)]">{activeService.summary}</p>
-                <p className="text-base text-[var(--text-secondary)] max-w-sm">{activeService.detail}</p>
+
+              <div className="space-y-4 border-l-2 border-[var(--accent)] pl-6">
+                <p className="text-lg font-medium leading-snug text-[var(--text-primary)]">{activeService.summary}</p>
+                <p className="text-sm leading-relaxed text-[var(--text-secondary)] max-w-sm">{activeService.detail}</p>
               </div>
 
-              <button className="text-sm font-bold uppercase tracking-widest text-[var(--accent)]">Learn More →</button>
+              <button className="text-xs font-semibold uppercase tracking-[0.15em] text-[var(--accent)] transition-colors hover:text-[var(--accent-strong)]">Learn More →</button>
             </motion.div>
           </AnimatePresence>
         </div>
 
         {/* Scrolling Images + Mobile Text Content */}
-        <div className="flex-1 space-y-24 lg:space-y-40">
-            {/* Introductory Header for Mobile */}
-            <div className="lg:hidden mb-16">
-                 <h2 className="text-5xl font-bold tracking-tighter text-[var(--text-primary)]">Expertise</h2>
-                 <p className="mt-4 text-[var(--text-secondary)]">Scroll to explore our core specialized services.</p>
+        <div className="flex-1 space-y-20 lg:space-y-32">
+            <div className="lg:hidden mb-12">
+                 <h2 className="text-[clamp(2rem,4.5vw,3rem)] font-bold tracking-tight text-[var(--text-primary)]">Expertise</h2>
+                 <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">Scroll to explore our core specialized services.</p>
             </div>
 
           {services.map((service, idx) => (
