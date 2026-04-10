@@ -48,11 +48,27 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
 
 body {
   margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
   background:
     radial-gradient(circle at 12% 18%, var(--page-glow-cool), transparent 24%),
     radial-gradient(circle at 84% 12%, var(--page-glow-warm), transparent 20%),

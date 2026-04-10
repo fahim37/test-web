@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ReactLenis } from "lenis/react";
 import Image from "next/image";
 import { useRef } from "react";
 
@@ -71,113 +70,149 @@ const projects: Project[] = [
 
 export default function StackedProjects() {
   return (
-    <ReactLenis root options={{ lerp: 0.1, smoothWheel: true }}>
-      <section className="bg-[var(--page-bg)] px-4 py-24 sm:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-20">
-            <p className="mb-2 text-sm font-bold uppercase tracking-widest text-[var(--accent-strong)]">Selected Works</p>
-            <h2 className="text-5xl font-bold tracking-tight text-[var(--text-primary)] sm:text-7xl">
-              Case Studies
-            </h2>
-          </div>
+    <section className="pt-28 pb-8 sm:pt-36">
+      <div className="mb-16 sm:mb-20">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent-strong)]">Selected Works</p>
+        <h2 className="text-[clamp(2rem,4.5vw,3.25rem)] font-bold tracking-tight text-[var(--text-primary)]">
+          Case Studies
+        </h2>
+      </div>
 
-          <div className="flex flex-col gap-[10vh]">
-            {projects.map((project, index) => (
-              <ProjectCard 
-                key={project.title} 
-                project={project} 
-                index={index}
-              />
-            ))}
-          </div>
-        </div>
-        {/* Extra space at bottom so the last card can scroll up */}
-        <div className="h-[30vh]" />
-      </section>
-    </ReactLenis>
+      <div className="flex flex-col gap-[10vh]">
+        {projects.map((project, index) => (
+          <ProjectCard
+            key={project.title}
+            project={project}
+            index={index}
+          />
+        ))}
+      </div>
+      <div className="h-[30vh]" />
+    </section>
   );
 }
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const container = useRef(null);
-  
+
   const { scrollYProgress } = useScroll({
     target: container,
     offset: ["start start", "end start"],
   });
 
-  // Calculate scaling: Cards underneath shrink slightly
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.85]);
-  // Calculate opacity: Cards underneath darken as others stack on top
-  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.6]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.65]);
 
   return (
-    <div 
-      ref={container} 
+    <div
+      ref={container}
       className="sticky top-0 h-fit w-full pt-10"
-      style={{ top: `${80 + (index * 32)}px` }} // Each card stops 32px lower than the previous
+      style={{ top: `${80 + index * 32}px` }}
     >
       <motion.article
-        style={{ scale, opacity }}
-        className="relative overflow-hidden rounded-[40px] border border-[var(--stroke)] bg-white shadow-[0_24px_60px_rgba(10,14,20,0.12)] transition-shadow duration-500 hover:shadow-[0_28px_70px_rgba(10,14,20,0.16)]"
+        style={{ scale, opacity, willChange: "transform, opacity" }}
+        className="group relative overflow-hidden rounded-[32px] border border-[var(--stroke)] shadow-[0_20px_50px_rgba(10,14,20,0.10)] transition-shadow duration-700 ease-out hover:shadow-[0_32px_80px_rgba(10,14,20,0.15)]"
       >
         {/* Background Gradient */}
         <div
           className="absolute inset-0 -z-10"
-          style={{ background: `linear-gradient(145deg, ${project.palette.from}, ${project.palette.to})` }}
+          style={{ background: `linear-gradient(160deg, ${project.palette.from}, ${project.palette.to})` }}
         />
 
-        <div className="flex flex-col gap-10 p-8 lg:flex-row lg:items-center lg:p-16">
+        <div className="flex flex-col gap-6 p-6 sm:p-8 lg:flex-row lg:items-stretch lg:gap-10 lg:p-10">
           {/* Content Section */}
-          <div className="flex-1 space-y-8 text-[var(--text-primary)]">
-            <div
-              className="inline-flex items-center gap-2 rounded-full border bg-white/70 px-4 py-2 text-xs font-bold uppercase tracking-widest backdrop-blur-md"
-              style={{ borderColor: `${project.palette.accent}26`, color: project.palette.accent }}
-            >
-              <span>{project.category}</span>
-            </div>
-            
-            <h3 className="text-4xl font-bold leading-[1.1] sm:text-6xl">{project.title}</h3>
-            
-            <p className="max-w-md text-lg leading-relaxed text-[var(--text-secondary)]">
-              {project.description}
-            </p>
-
-            <div className="grid grid-cols-2 gap-8 border-t border-black/10 pt-8">
-              <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: project.palette.accent }}>
-                  Location
-                </p>
-                <p className="font-semibold">{project.location}</p>
+          <div className="flex flex-1 flex-col justify-between gap-6" style={{ color: project.palette.text }}>
+            <div className="space-y-4">
+              <div
+                className="inline-flex items-center rounded-full border bg-white/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.15em] backdrop-blur-sm"
+                style={{ borderColor: `${project.palette.accent}20`, color: project.palette.accent }}
+              >
+                {project.category}
               </div>
-              <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: project.palette.accent }}>
-                  Project Scope
-                </p>
-                <p className="font-semibold">{project.scope}</p>
+
+              <h3 className="text-[clamp(1.5rem,3vw,2.25rem)] font-bold leading-[1.15] tracking-tight">{project.title}</h3>
+
+              <div className="space-y-3 pt-1">
+                <div>
+                  <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.12em]" style={{ color: project.palette.accent }}>
+                    The Challenge
+                  </p>
+                  <p className="max-w-md text-sm leading-relaxed text-[var(--text-secondary)]">
+                    {project.problem}
+                  </p>
+                </div>
+                <div>
+                  <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.12em]" style={{ color: project.palette.accent }}>
+                    Our Solution
+                  </p>
+                  <p className="max-w-md text-sm leading-relaxed text-[var(--text-secondary)]">
+                    {project.solution}
+                  </p>
+                </div>
               </div>
             </div>
 
-            <div className="flex items-center gap-4">
-               <div className="relative h-12 w-12 overflow-hidden rounded-full ring-2 ring-white">
-                <Image src={project.avatar} alt={project.leadName} fill className="object-cover" />
-               </div>
-               <div>
-                 <p className="text-sm font-bold">{project.leadName}</p>
-                 <p className="text-xs text-[var(--text-secondary)]">{project.leadRole}</p>
-               </div>
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-6 border-t pt-4" style={{ borderColor: `${project.palette.accent}15` }}>
+                <div>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.12em]" style={{ color: project.palette.accent }}>
+                    Scope
+                  </p>
+                  <p className="mt-0.5 text-sm font-semibold">{project.scope}</p>
+                </div>
+                <div>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.12em]" style={{ color: project.palette.accent }}>
+                    Tech
+                  </p>
+                  <p className="mt-0.5 text-sm font-semibold">{project.tech}</p>
+                </div>
+              </div>
+
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-all duration-500 ease-out hover:gap-3 hover:shadow-lg"
+                style={{ backgroundColor: project.palette.accent }}
+              >
+                View Live Project
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-500 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+                  <path d="M7 17L17 7" />
+                  <path d="M7 7h10v10" />
+                </svg>
+              </a>
             </div>
           </div>
 
-          {/* Image Section */}
-          <div className="relative aspect-[4/3] w-full flex-1 overflow-hidden rounded-3xl shadow-lg lg:aspect-square">
-            <Image
-              fill
-              src={project.image}
-              alt={project.title}
-              className="object-cover transition-transform duration-700 hover:scale-105"
-            />
-          </div>
+          {/* Image Section — browser-frame style */}
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative flex flex-1 flex-col overflow-hidden rounded-xl bg-[#1a1a2e] shadow-lg transition-transform duration-700 ease-out group-hover:scale-[1.015] cursor-pointer lg:min-h-[320px]"
+          >
+            {/* Browser chrome bar */}
+            <div className="flex items-center gap-2 px-4 py-2 bg-[#12121f]">
+              <div className="flex gap-1.5">
+                <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
+                <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
+                <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
+              </div>
+              <div className="ml-2 flex-1 rounded-md bg-white/10 px-3 py-0.5 text-[11px] text-white/40 font-mono truncate">
+                {project.link.replace("https://", "")}
+              </div>
+            </div>
+            {/* Screenshot */}
+            <div className="relative flex-1 min-h-[200px]">
+              <Image
+                fill
+                src={project.image}
+                alt={project.title}
+                className="object-cover object-top transition-transform duration-[1s] ease-out group-hover:scale-[1.03]"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+          </a>
         </div>
       </motion.article>
     </div>
