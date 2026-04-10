@@ -11,27 +11,27 @@ export function HeroSection() {
           "radial-gradient(circle at 14% 18%, rgba(3, 95, 232, 0.08), transparent 26%), radial-gradient(circle at 84% 14%, rgba(255, 111, 0, 0.12), transparent 22%), linear-gradient(96deg, rgba(255, 255, 255, 0.98) 0%, rgba(243, 247, 255, 0.98) 56%, rgba(255, 245, 237, 0.98) 100%), repeating-linear-gradient(90deg, rgba(10, 14, 20, 0.06) 0px, rgba(10, 14, 20, 0.06) 1px, transparent 1px, transparent 104px)",
       }}
     >
-      <div className="relative mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20 lg:grid lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16 lg:px-12 lg:py-24">
-        <div className="max-w-xl">
-          <span className="inline-flex rounded-md border border-[rgba(3,95,232,0.2)] bg-white/75 px-3 py-1 text-sm font-medium text-[var(--accent-strong)] shadow-[0_12px_30px_rgba(3,95,232,0.08)]">
+      <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24 lg:grid lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-12 lg:px-12 lg:py-32">
+        <div className="max-w-lg">
+          <span className="inline-flex rounded-full border border-[rgba(3,95,232,0.15)] bg-white/70 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-[var(--accent-strong)]">
             Transforming Ideas into Solutions
           </span>
-          <h1 className="mt-8 text-4xl font-semibold leading-[1.08] tracking-[-0.02em] text-[var(--text-primary)] sm:text-5xl lg:text-[62px]">
-            The Smartest Software Solutions for Your Businesses
+          <h1 className="mt-6 text-[clamp(2.25rem,5vw,3.75rem)] font-semibold leading-[1.08] tracking-[-0.025em] text-[var(--text-primary)]">
+            The Smartest Software Solutions for Your Business
           </h1>
-          <p className="mt-8 max-w-md text-lg leading-8 text-[var(--text-secondary)]">
+          <p className="mt-5 max-w-md text-base leading-relaxed text-[var(--text-secondary)] sm:text-lg sm:leading-relaxed">
             We design, develop, and deliver scalable digital solutions tailored to your business needs.
           </p>
           <Link
             href="#contact"
-            className="mt-10 inline-flex rounded-xl bg-[var(--accent)] px-9 py-3.5 text-lg font-semibold text-white shadow-[0_18px_38px_rgba(3,95,232,0.22)] transition hover:bg-[var(--accent-strong)]"
+            className="mt-8 inline-flex rounded-xl bg-[var(--accent)] px-7 py-3 text-sm font-semibold text-white shadow-[0_12px_32px_rgba(3,95,232,0.2)] transition-all duration-300 hover:bg-[var(--accent-strong)] hover:shadow-[0_16px_40px_rgba(3,95,232,0.28)]"
           >
-            Lets Discuss
+            Let&apos;s Discuss
           </Link>
         </div>
 
         <div className="mt-12 lg:mt-0">
-          <div className="overflow-hidden rounded-[24px] border-[10px] border-white bg-[#f6f8fc] shadow-[0_24px_60px_rgba(10,14,20,0.14)] ring-1 ring-[rgba(10,14,20,0.06)]">
+          <div className="overflow-hidden rounded-2xl border-[8px] border-white bg-[#f6f8fc] shadow-[0_20px_50px_rgba(10,14,20,0.12)] ring-1 ring-[rgba(10,14,20,0.05)]">
             <Image
               src="/hero-software.jpg"
               alt="Developer writing code on dual monitors"
